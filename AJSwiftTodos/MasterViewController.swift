@@ -41,12 +41,12 @@ class MasterViewController: UITableViewController {
         ac.addTextField()
         ac.addAction(UIAlertAction(title: "Add", style: .default,handler: addItem))
         present(ac, animated: true)
-        objects.insert(NSDate(), at: 0)
-        let indexPath = IndexPath(row: 0, section: 0)
-        self.tableView.insertRows(at: [indexPath], with: .automatic)
     }
 
     func addItem(action: UIAlertAction!) {
+        objects.insert(NSDate(), at: 0)
+        let indexPath = IndexPath(row: 0, section: 0)
+        self.tableView.insertRows(at: [indexPath], with: .automatic)
     }
 
     // MARK: - Segues
