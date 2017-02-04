@@ -11,7 +11,7 @@ import UIKit
 class MasterViewController: UITableViewController {
 
     var detailViewController: DetailViewController? = nil
-    var objects = [String]()
+    var objects = [Any]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -79,7 +79,7 @@ class MasterViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
 
         let object = objects[indexPath.row]
-        cell.textLabel!.text = object
+        cell.textLabel!.text = object as! String
         return cell
     }
 
