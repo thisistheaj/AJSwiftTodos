@@ -11,7 +11,7 @@ import UIKit
 class MasterViewController: UITableViewController {
 
     var detailViewController: DetailViewController? = nil
-    var objects = [Any]()
+    var objects = [String]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,14 +39,16 @@ class MasterViewController: UITableViewController {
     func insertNewObject(_ sender: Any) {
         let ac = UIAlertController(title: "Add Item", message: "Add an Item to the list", preferredStyle: .alert)
         ac.addTextField()
-        ac.addAction(UIAlertAction(title: "Add", style: .default,handler: addItem))
-        present(ac, animated: true)
-    }
+        ac.addAction(UIAlertAction(title: "Add", style: .default,handler: {
+            alert -> Void in
 
-    func addItem(action: UIAlertAction!) {
-        objects.insert(NSDate(), at: 0)
-        let indexPath = IndexPath(row: 0, section: 0)
-        self.tableView.insertRows(at: [indexPath], with: .automatic)
+            self.objects.insert(ac.textFields![0].text! as String, at: 0)
+            let indexPath = IndexPath(row: 0, section: 0)
+            self.tableView.insertRows(at: [indexPath], with: .automatic)
+
+        }))
+        ac.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        present(ac, animated: true)
     }
 
     // MARK: - Segues
@@ -76,8 +78,8 @@ class MasterViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
 
-        let object = objects[indexPath.row] as! NSDate
-        cell.textLabel!.text = object.description
+        let object = objects[indexPath.row]
+        cell.textLabel!.text = object
         return cell
     }
 
